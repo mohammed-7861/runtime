@@ -57,6 +57,26 @@ reads it, and `inputs.json` records it.
 
 ## Where the rows are
 
+**The series data stays on the node.** It is not in this repo. On `gitmachine-2`:
+
+```
+/var/lib/gitm/results/202/   run 15
+/var/lib/gitm/results/204/   run 16  …through…
+/var/lib/gitm/results/213/   run 25        (job 203 is a diagnostic, not a run)
+```
+
+To turn them into `run_records` rows, run this on the node (as a job, or once `/mnt/gitm-runs` is mounted):
+
+```
+cd /var/lib/gitm/results
+python3 202/h200_baseline/write_record.py rows 202 204 205 206 207 208 209 210 211 212 213 \
+    --out /tmp/rows.jsonl --sql /tmp/rows.sql
+```
+
+Runs 1–7 (jobs 170–176, no health) and the discarded attempts of runs 8–14
+(`/var/lib/gitm/results/discarded/181`, `189`–`195`, old `power_cap` rule) are still
+there for reference. They are not part of the series.
+
 Per run, in `<results>/<slurm job id>/`:
 
 - `inputs.json`: run ID (ENG-76 format), job id, node, model, revision, engine version, flags, trace, image, script hashes.
