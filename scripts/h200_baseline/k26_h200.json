@@ -1,0 +1,22 @@
+{
+  "series": "eng-95-k26-h200-baseline",
+  "model": "moonshotai/Kimi-K2.6",
+  "hf_revision": "7eb5002f6aadc958aed6a9177b7ed26bb94011bb",
+  "node": "gitmachine-2",
+  "engine": "vllm",
+  "engine_kwargs": {
+    "tensor_parallel_size": 8,
+    "trust_remote_code": true,
+    "gpu_memory_utilization": 0.92,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 256,
+    "max_model_len": 65536,
+    "disable_log_stats": false
+  },
+  "traffic": {
+    "source": "mooncake",
+    "url": "https://raw.githubusercontent.com/kvcache-ai/Mooncake/3cca71daccf2a7afb8fe3f0295358f70e3a69fdb/FAST25-release/traces/conversation_trace.jsonl",
+    "sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+    "requests": 256
+  }
+}
